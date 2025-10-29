@@ -1,7 +1,7 @@
 class HashTable {
   constructor() {
-    this.size = 1000;
-    this.buckets = Array(1000).fill(null);
+    this.size = 32;
+    this.buckets = Array(32).fill(null);
   }
 
   hash(key) {
@@ -30,3 +30,19 @@ class HashTable {
     }
   }
 }
+
+const table1 = new HashTable();
+
+for (const char of 'academind') {
+  table1.set(char, char);
+}
+
+for (const char of 'hello') {
+  table1.set(char, char);
+}
+
+for (const char of 'does this work') {
+  table1.set(char, char);
+}
+
+console.log(table1.showInfo());
