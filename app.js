@@ -1,37 +1,32 @@
-class Stack {
+class HashTable {
   constructor() {
-    this.items = [];
+    this.size = 1000;
+    this.buckets = Array(1000).fill(null);
   }
 
-  push(value) {
-    this.items.push(value);
+  hash(key) {
+    let hash = 0;
+    for (const char of key) {
+      hash += char.charCodeAt(0);
+    }
+    return hash % this.size;
   }
 
-  pop() {
-    return this.items.pop();
+  set(key, value) {
+    const keyHash = this.hash(key);
+    this.buckets[keyHash] = value;
   }
 
-  isEmpty() {
-    return this.items.length === 0;
+  get(key) {
+    const keyHash = this.hash(key);
+    return this.buckets[keyHash];
   }
 
-  toArray() {
-    return this.items.slice();
+  showInfo() {
+    for (const key in this.buckets) {
+      if (this.buckets[key] !== null) {
+        console.log(key, this.buckets[key]);
+      }
+    }
   }
 }
-
-const stack = new Stack();
-stack.push("Cook dinner!");
-stack.push("Wash the dishes!");
-stack.push("Buy ingredients!");
-
-console.log(stack.toArray());
-
-console.log(stack.pop());
-
-console.log(stack.pop());
-
-console.log(stack.pop());
-console.log(stack.pop());
-
-console.log(stack.toArray());
